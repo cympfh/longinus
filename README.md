@@ -14,6 +14,16 @@ Env `LONGINUS_KEY` is prior to `key` in `config.ymml`.
 
 ## usage
 
+### launch server
+
+Install `node` and dependencies by `npm i` then,
+
+```bash
+node ./server.js
+# or
+LONGINUS_KEY=hogehoge node ./server.js
+```
+
 ### POST, logging
 
 ```bash
