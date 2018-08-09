@@ -1,0 +1,4 @@
+web:
+  port: 8080
+output_path: ./log
+key: pa$$w0rd  # or environ LONGINUS_KEY

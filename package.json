@@ -1,0 +1,24 @@
+{
+  "name": "longinus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "date"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/cympfh/longinus.git"
+  },
+  "author": "cympfh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cympfh/longinus/issues"
+  },
+  "homepage": "https://github.com/cympfh/longinus#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "node-yaml": "^3.1.1"
+  }
+}
