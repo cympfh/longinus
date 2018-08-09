@@ -73,17 +73,20 @@ app.post('/*', (req, res) => {
     req.on('data', (chunk) => { data += chunk })
     req.on('end', () => {
         data = data.replace(/\n/g, '\\n');
-        if (is_authorized(req)) {
+        if (data == '') {
+            res.status(400).send('Empty denied');
+        } else if (is_authorized(req)) {
             const datetime = new Date().toISOString();
             console.log(`Authorized POST to ${tag} : ${data}`);
             const line = `${datetime}\t${tag}\t${data}\n`;
             if (!write(line)) {
                 console.log('[Err] something wrong in write()');
             }
+            res.send('Accepted');
         } else {
             console.log(`Unauthorized POST to ${tag} : ${data}`);
+            res.status(401).send('Unauthorized');
         }
-        res.send('Accepted');
     });
 });
 
