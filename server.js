@@ -45,7 +45,14 @@ function get_content(tag, opts, cont) {
     });
 }
 
-app.use(morgan('combined'));
+app.use(morgan((tokens, req, res) =>
+    [
+        tokens.method(req, res),
+        decodeURIComponent(tokens.url(req, res)),
+        tokens.status(req, res),
+        tokens.res(req, res, 'content-length'), '-',
+        tokens['response-time'](req, res), 'ms'
+    ].join(' ')));
 
 app.get('/*', (req, res) => {
     const tag = req.path;
