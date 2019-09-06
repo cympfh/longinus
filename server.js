@@ -45,15 +45,29 @@ function get_content(tag, opts, cont) {
     });
 }
 
+function url_decode(url) {
+  try {
+    return decodeURIComponent(url);
+  } catch (e) {
+    return url;
+  }
+}
+
 app.use(morgan((tokens, req, res) =>
     [
         tokens.method(req, res),
-        decodeURIComponent(tokens.url(req, res)),
+        url_decode(tokens.url(req, res)),
         tokens.status(req, res),
         tokens.res(req, res, 'content-length'), '-',
         tokens['response-time'](req, res), 'ms', '-',
         tokens['user-agent'](req, res)
     ].join(' ')));
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, X-KEY");
+    next();
+});
 
 app.get('/*', (req, res) => {
     const tag = req.path;
